@@ -1,0 +1,68 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+i = 30
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.Hide();
+    BLOCK SIZE (PX) = 16;
+    BOARD HEIGHT (PX) = 360;
+    BOARD WIDTH (PX) = 480;
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Draw Border)
+{
+    Call Draw board;
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Draw board (warp=true)
+{
+    i = 0;
+    Repeat ((BOARD WIDTH (PX) / BLOCK SIZE (PX)))
+    {
+        Motion.GoToXY((((BOARD WIDTH (PX) / -2) + 8) + (i * BLOCK SIZE (PX))), ((BOARD HEIGHT (PX) / -2) + 8));
+        Pen.Stamp();
+        i += 1;
+    }
+    i = 1;
+    Repeat (((BOARD HEIGHT (PX) / BLOCK SIZE (PX)) - 2))
+    {
+        Motion.GoToXY(((BOARD WIDTH (PX) / -2) + 8), (((BOARD HEIGHT (PX) / -2) + 8) + (i * BLOCK SIZE (PX))));
+        Pen.Stamp();
+        Motion.GoToXY(((BOARD WIDTH (PX) / 2) + -8), (((BOARD HEIGHT (PX) / -2) + 8) + (i * BLOCK SIZE (PX))));
+        Pen.Stamp();
+        i += 1;
+    }
+    i = 0;
+    Repeat ((BOARD WIDTH (PX) / BLOCK SIZE (PX)))
+    {
+        Motion.GoToXY((((BOARD WIDTH (PX) / -2) + 8) + (i * BLOCK SIZE (PX))), ((BOARD HEIGHT (PX) / 2) + -8));
+        Pen.Stamp();
+        i += 1;
+    }
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+Motion.GoToXY((((BOARD WIDTH (PX) / -2) + 8) + (i * BLOCK SIZE (PX))), ((BOARD HEIGHT (PX) / -2) + 8))
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav
